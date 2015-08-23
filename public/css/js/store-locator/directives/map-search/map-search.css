@@ -1,0 +1,123 @@
+.pad__top--sm {
+  padding-top: 5%; }
+
+.push__down--sm {
+  margin-top: 5%; }
+
+.push__down--md {
+  margin-top: 15%; }
+
+.store-locator {
+  height: 100%; }
+
+.search-component {
+  height: 100%;
+  padding: 0;
+  z-index: 99; }
+
+.store-locator__searchBox {
+  background-color: #fff;
+  height: 10%;
+  margin: 0;
+  padding: 3% 5%; }
+
+.store-locator__searchBox div {
+  background-color: #fff; }
+
+.store-locator__searchBox i {
+  line-height: 1.5em;
+  font-size: 1.75em;
+  color: #59665d; }
+
+.store-locator__searchBox input {
+  width: 100%;
+  font-style: italic;
+  color: #59665d;
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0; }
+
+.store-locator__searchBtn {
+  height: 35px;
+  margin: 0; }
+
+.store-locator__completeList {
+  height: 5%;
+  background-color: #fff;
+  padding: 0 3%; }
+
+.store-locator__completeList p {
+  padding: 0 2%; }
+
+.search-results {
+  height: 85%;
+  background-color: #fff;
+  padding: 0; }
+
+.search-results__list {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 2%;
+  background-color: #fff; }
+
+.search-results__list::-webkit-scrollbar {
+  width: .5em; }
+
+.search-results__list::-webkit-scrollbar-thumb {
+  background-color: #59665d; }
+
+.md-default-theme {
+  padding: 0; }
+
+.md-3-line {
+  background-color: #fff;
+  margin: 2% 0;
+  padding: 0; }
+
+.md-3-line:hover {
+  background-color: #fafaf5; }
+
+.md-list-item-text h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1em;
+  font-weight: bold; }
+
+.md-list-item-text p {
+  font-family: serif; }
+
+.slideList {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  background-color: #fff; }
+
+.slideListOut__right {
+  animation-duration: .5s;
+  animation-fill-mode: both;
+  animation-name: slideListOutRight; }
+
+.slideListIn__right {
+  animation-duration: .5s;
+  animation-fill-mode: both;
+  animation-name: slideListInRight; }
+
+@keyframes slideListOutRight {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1; }
+  100% {
+    visibility: hidden;
+    display: none;
+    transform: translate3d(100%, 0, 0);
+    opacity: 0; } }
+
+@keyframes slideListInRight {
+  0% {
+    transform: translate3d(100%, 0, 0);
+    opacity: 0; }
+  100% {
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+    opacity: 1; } }

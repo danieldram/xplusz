@@ -1,0 +1,28 @@
+zero_marpad, div {
+  padding: 0;
+  margin: 0; }
+
+html, body {
+  font: 100% Helvetica, sans-serif;
+  color: #222;
+  background-color: #eaeaea;
+  height: 100%; }
+
+.map {
+  margin: 0;
+  padding: 0;
+  height: 100%; }
+
+#canvas-map {
+  height: 100%; }
+
+.test {
+  background-color: orange;
+  height: 200px; }
+
+.map-component {
+  height: 100%;
+  padding: 0; }
+
+.pac-container {
+  top: 0; }
