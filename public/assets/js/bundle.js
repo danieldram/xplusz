@@ -19813,13 +19813,19 @@ module.exports = require('./lib/React');
 var React = require('react');
 
 var MyView = React.createClass({displayName: "MyView",
-  render: Example,
+  render:               Example,
+
 });
+
 
 
 function Example () {
 
-return(React.createElement("div", null, " ", this.props.title, " "));
+return(
+    React.createElement("div", null, 
+    React.createElement("button", {onClick: this.props.whenClicked}, " Show Example Text "), 
+    React.createElement("p", {className: (this.props.state) ? "show": "hide"}, this.props.title)
+    ));
 }
 
 
@@ -19829,27 +19835,53 @@ return(React.createElement("div", null, " ", this.props.title, " "));
 module.exports = MyView;
 
 },{"react":156}],158:[function(require,module,exports){
-var React       = require('react');
-var Example     = require('../../classes/example.jsx');
-
+var React               = require('react');
+var Example             = require('../../classes/example.jsx');
+var GetIntialState      = require('./handlers/get-initial-state.jsx');
+var ClickHandler        = require('./handlers/click-handler.jsx');
+var Options             = require('./data/options.jsx')
 
 var Container = React.createClass({displayName: "Container",
-  render: container,
+  render:           container,
+  clickHandler:     ClickHandler,
+  getInitialState:  GetIntialState,
+  options:          Options,
 });
 
 
+
+
 function container () {
-return React.createElement("div", {className: "row"}, React.createElement(Example, {title: "test"})) ;
+return (
+    React.createElement("div", {className: "row"}, 
+    React.createElement(Example, {state: this.state.visibility, whenClicked: this.clickHandler, title: this.options.title})
+    ) ) ;
 
 }
 
-var options = {
-title: 'example'
+
+module.exports = module.exports = {elm: React.createElement(Container), target: document.body}
+
+},{"../../classes/example.jsx":157,"./data/options.jsx":159,"./handlers/click-handler.jsx":160,"./handlers/get-initial-state.jsx":161,"react":156}],159:[function(require,module,exports){
+
+var options =  {
+    title: "Browserified / componentized react modules."
 };
 
-module.exports = module.exports = {elm: React.createElement(Container, options), target: document.body}
 
-},{"../../classes/example.jsx":157,"react":156}],159:[function(require,module,exports){
+module.exports = options;
+
+},{}],160:[function(require,module,exports){
+module.exports = function ClickHandler () {
+    this.setState({visibility: !this.state.visibility});
+}
+
+},{}],161:[function(require,module,exports){
+module.exports = function GetInitialState () {
+    return {visibility: false};
+}
+
+},{}],162:[function(require,module,exports){
 var React = require('react');
 
 var view = [];
@@ -19862,4 +19894,4 @@ for(var i = 0; i<view.length; i++){
     React.render(view[i].elm, view[i].target);
 }
 
-},{"./components/example/container.jsx":158,"react":156}]},{},[159]);
+},{"./components/example/container.jsx":158,"react":156}]},{},[162]);
