@@ -19819,22 +19819,47 @@ var MyView = React.createClass({displayName: "MyView",
 
 function Example () {
 
-    return(React.createElement("div", null, " Example "));
+return(React.createElement("div", null, " ", this.props.title, " "));
 }
 
 
-module.exports = {elm: React.createElement(MyView), target: document.getElementById('content')}
+
+
+
+module.exports = MyView;
 
 },{"react":156}],158:[function(require,module,exports){
+var React       = require('react');
+var Example     = require('../../classes/example.jsx');
+
+
+var Container = React.createClass({displayName: "Container",
+  render: container,
+});
+
+
+function container () {
+return React.createElement("div", {className: "row"}, React.createElement(Example, {title: "test"})) ;
+
+}
+
+var options = {
+title: 'example'
+};
+
+module.exports = module.exports = {elm: React.createElement(Container, options), target: document.body}
+
+},{"../../classes/example.jsx":157,"react":156}],159:[function(require,module,exports){
 var React = require('react');
 
 var view = [];
 
-view.push(require('./components/view.jsx')); // need to specify the jsx extension
+//view.push(require('./components/view.jsx')); // need to specify the jsx extension
+view.push(require('./components/example/container.jsx')); // need to specify the jsx extension
 
 
 for(var i = 0; i<view.length; i++){
     React.render(view[i].elm, view[i].target);
 }
 
-},{"./components/view.jsx":157,"react":156}]},{},[158]);
+},{"./components/example/container.jsx":158,"react":156}]},{},[159]);
