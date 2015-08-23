@@ -6,10 +6,10 @@ var react               = require('react');
 
 
 /*******************
-* LOCAL MODULES
+* MAIN MODULES
 ******************/
-var hello               = require('./js/react/hello.js');
+var main               = require('./js/react/main.js');
 
 /*******************
-* APPLICATIONS
+* APPLICATION SPECIFIC
 ******************/
