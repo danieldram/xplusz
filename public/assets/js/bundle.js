@@ -19822,10 +19822,11 @@ var MyView = React.createClass({displayName: "MyView",
 function Example () {
 
 return(
-    React.createElement("div", null, 
-    React.createElement("button", {onClick: this.props.whenClicked}, " Show Example Text "), 
-    React.createElement("p", {className: (this.props.state) ? "show": "hide"}, this.props.title)
-    ));
+        React.createElement("div", null, 
+            React.createElement("button", {onClick: this.props.whenClicked}, " Show Example Text "), 
+            React.createElement("p", {className: (this.props.state) ? "show": "hide"}, this.props.title)
+        )
+    );
 }
 
 
@@ -19860,7 +19861,7 @@ return (
 }
 
 
-module.exports = module.exports = {elm: React.createElement(Container), target: document.body}
+module.exports = {elm: React.createElement(Container), target: document.body}
 
 },{"../../classes/example.jsx":157,"./data/options.jsx":159,"./handlers/click-handler.jsx":160,"./handlers/get-initial-state.jsx":161,"react":156}],159:[function(require,module,exports){
 
@@ -19884,10 +19885,9 @@ module.exports = function GetInitialState () {
 },{}],162:[function(require,module,exports){
 var React = require('react');
 
-var view = [];
 
-//view.push(require('./components/view.jsx')); // need to specify the jsx extension
-view.push(require('./components/example/container.jsx')); // need to specify the jsx extension
+var view = [];
+view.push(require('./components/example/container.jsx'));
 
 
 for(var i = 0; i<view.length; i++){

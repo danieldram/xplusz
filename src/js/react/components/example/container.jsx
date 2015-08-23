@@ -23,4 +23,4 @@ return (
 }
 
 
-module.exports = module.exports = {elm: React.createElement(Container), target: document.body}
+module.exports = {elm: React.createElement(Container), target: document.body}
