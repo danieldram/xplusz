@@ -1,7 +1,5 @@
 {
-  "name": "store-locator",
   "version": "0.0.1",
-  "description": "Store Locator Angular App - Iamota",
   "main": "./public/index.html",
   "window": {
     "toolbar": false,
@@ -12,12 +10,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://bitbucket.org/iamota/maps-api.git"
+    "type": "git"
   },
   "author": "Daniel Ram",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/iamota/maps-api#readme",
   "devDependencies": {
     "browser-sync": "^2.7.13",
     "browserify": "^11.0.0",
@@ -38,20 +34,11 @@
     "yargs": "^3.14.0"
   },
   "dependencies": {
-    "angular": "^1.4.3",
-    "angular-animate": "^1.4.3",
-    "angular-aria": "^1.4.3",
-    "angular-material": "^0.10.0",
-    "body-parser": "^1.13.1",
-    "express": "^4.12.4",
-    "foundation": "^4.2.1",
-    "gulp": "^3.9.0",
-    "jquery": "^2.1.4",
-    "mongodb": "^2.0.34",
-    "mongoose": "^4.0.5",
-    "morgan": "^1.6.0",
+    "events": "^1.0.2",
+    "flux": "^2.0.3",
+    "object-assign": "^4.0.1",
     "react": "^0.13.3",
-    "reactify": "^1.1.1",
-    "stylus": "^0.51.1"
+    "react-router": "^0.13.3",
+    "reactify": "^1.1.1"
   }
 }
