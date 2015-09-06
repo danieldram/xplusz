@@ -1,14 +1,14 @@
 /*******************
 * NPM MODULES
 ******************/
-//var angular           = require('angular');
-var react               = require('react');
+//var angular                  = require('angular');
+var react                      = require('react');
 
 
 /*******************
 * MAIN MODULES
 ******************/
-var main               = require('./js/react/main.js');
+var reactBuilder               = require('./js/react/react-builder.js');
 
 /*******************
 * APPLICATION SPECIFIC
