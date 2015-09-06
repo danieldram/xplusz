@@ -1,8 +1,11 @@
 var React               = require('react');
-var Example             = require('../../classes/example.jsx');
+var Router              = require('react-router');
+var RouteHandler        = require('react-router').RouteHandler;
+//var Example             = require('../../classes/example.jsx');
 var GetIntialState      = require('./handlers/get-initial-state.jsx');
 var ClickHandler        = require('./handlers/click-handler.jsx');
-var Options             = require('./data/options.jsx')
+var Options             = require('./data/options.jsx');
+var routes              = require('./router/router.js');
 
 var Container = React.createClass({
   render:           container,
@@ -17,10 +20,19 @@ var Container = React.createClass({
 function container () {
 return (
     <div className="row">
-    <Example state={this.state.visibility} whenClicked={this.clickHandler} title={this.options.title} />
-    </div> ) ;
+        <RouteHandler />
+    </div>
+    ) ;
+
 
 }
 
+Router.run(routes, function(Handler){
+module.exports = {elm: <Handler />, target: document.body}
 
-module.exports = {elm: React.createElement(Container), target: document.body}
+});
+
+
+
+
+//<Example state={this.state.visibility} whenClicked={this.clickHandler} title={this.options.title} />

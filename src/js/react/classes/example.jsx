@@ -2,7 +2,7 @@
 var React = require('react');
 
 var MyView = React.createClass({
-  render:               Example,
+  render: Example,
 
 });
 

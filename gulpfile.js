@@ -25,7 +25,7 @@ var args = require('yargs').argv;
 gulp.task('js', function(){
     var b  = browserify();
     b.transform(reactify);
-    b.add('./src/js/react/main.js');
+    b.add('./src/js/react/react-builder.js');
 
     return   b.bundle()
             .pipe(source('bundle.js'))
