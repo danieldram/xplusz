@@ -1,5 +1,8 @@
 var express = require('express');
+var logger = require('morgan');
+var bodyparser = require('body-parser');
 var port = process.env.PORT || 7203;
+var assert = require('assert');
 var path = require('path');
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -20,6 +23,5 @@ app.get('*', function(req, res){
 
 app.listen(port);
 console.log('listening on port'+port+'....');
-
 
 
