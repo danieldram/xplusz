@@ -4,13 +4,14 @@
 
 /* VENDOR DEPS */
 @import "vendor/_bootstrap";
-
+@import "vendor/font-awesome/font-awesome";
 
 /* CONFIG / SETTINGS */
 @import "settings/base";
+
+/* WEB FONTS */
 @import url(https://fonts.googleapis.com/css?family=Merriweather);
 
 
-
-/* COMPONENTS */
+/* APP STYLING */
 @import "components/c_app";
