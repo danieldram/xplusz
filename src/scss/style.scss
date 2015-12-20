@@ -2,7 +2,15 @@
 //   Libraries
 // -------------------------------------
 
+/* VENDOR DEPS */
+@import "vendor/_bootstrap";
 
-@import "vendor/foundation.scss";
-@import "vendor/foundation-icons.scss";
 
+/* CONFIG / SETTINGS */
+@import "settings/base";
+@import url(https://fonts.googleapis.com/css?family=Merriweather);
+
+
+
+/* COMPONENTS */
+@import "components/c_app";
