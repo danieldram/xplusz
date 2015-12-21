@@ -11,6 +11,7 @@ var concatCss       = require("gulp-concat-css");
 //var watchify      = require('watchify');
 var browserify      = require('browserify');
 var reactify        = require('reactify');
+var babelify        = require('babelify');
 var source          = require('vinyl-source-stream');
 
 
@@ -24,7 +25,8 @@ var args = require('yargs').argv;
 
 gulp.task('js', function(){
     var b  = browserify();
-    b.transform(reactify);
+    b.transform('reactify', {stripTypes: true, es6: true});
+
     b.add('./src/js/react/react-builder.js');
 
     return   b.bundle()

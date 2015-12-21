@@ -1,10 +1,27 @@
 var React             = require('react');
-var _render           = require('./lifecycle-hooks/render.jsx');
-var _getInitialState   = require('./lifecycle-hooks/get-initial-state.js');
+var lifecycle         = require('./lifecycle-hooks')
+var methods           = require('./methods');
 
 var App = React.createClass({
-  getInitialState(){return _getInitialState(this)},
-  render(){ return _render(this)}
+  getInitialState(){
+    return lifecycle.getInitialState(this);
+  },
+
+  setUI(bool){
+    this.setState({toggleUI:bool});
+  },
+
+  setLocalStorage(catName, value){
+    methods.setLocalStorage(catName, value);
+  },
+
+  setCategoryData(catName, value){
+    return methods.setCategoryData.bind(this, catName, value);
+  },
+
+  render(){
+    return lifecycle.render(this);
+  }
 });
 
 

@@ -19814,15 +19814,45 @@ var React = require('react');
 
 var create = React.createClass({displayName: "create",
 
-  render(){
-    return (
-      React.createElement("div", {className: "col-sm-12 col-md-12 c_createItem"}, 
-        React.createElement("input", {type: "text", className: "form-control", placeholder: "Enter Item Name"})
-      )
-    );
-  }
+  render:render,
+  style:style,
+  getValues: getValues,
 
 });
+
+function render(){
+  return (
+    React.createElement("div", {className: "col-sm-12 col-md-12 c_createItem", style: this.style()}, 
+      React.createElement("input", {id: "createItem__input", type: "text", className: "form-control", placeholder: "Enter Item Name"}), 
+
+      React.createElement("div", {className: "col-sm-6 col-md-6"}, 
+        React.createElement("select", {id: "createItem__select", className: "form-control"}, 
+          React.createElement("option", {defaultValue: true, disabled: true}, "choose a category"), 
+          React.createElement("option", null, "Category 1"), 
+          React.createElement("option", null, "Category 2")
+        )
+      ), 
+
+      React.createElement("div", {className: "col-sm-6 col-md-6"}, 
+      React.createElement("button", {
+        className: "btn btn-xplusz col-sm-12 col-md-12", 
+        onClick: this.getValues}, "ADD ITEM")
+      )
+  )
+
+  );
+}
+
+function style(){
+  return (this.props.state) ? {display:'block'} : {display:'none'};
+}
+
+function getValues(){
+    var value = document.getElementById('createItem__input').value;
+    var catName = document.getElementById('createItem__select').value;
+    this.props.setLocalStorage(catName, value);
+}
+
 
 module.exports = create;
 
@@ -19831,28 +19861,35 @@ var React = require('react');
 
 var marvel = React.createClass({displayName: "marvel",
   render: render,
-  visibility: visibility,
-
+  style:style,
 });
 
-function visibility(){
-  if(this.props.state === false)
-  return false;
-  return true;
+function style(ui){
+  if(ui=="create")
+  return (this.props.state) ? {color:'#fff'} : {};
+
+  if(ui=="search")
+  return (!this.props.state) ? {color:'#fff'} : {};
+
 }
 
 function render(){
-  console.log(this.props.state);
+  console.log(this.props);
   return(
     React.createElement("div", {className: "col-sm-12 col-md-12 c_header"}, 
       React.createElement("div", {className: "col-sm-2 col-md-2 icon-search"}, 
-        React.createElement("i", {className: "fa fa-pencil-square-o"})
+        React.createElement("i", {className: "fa fa-pencil-square-o", 
+          onClick: this.props.setUI.bind(null, true), 
+          style: this.style('create')
+          })
       ), 
       React.createElement("div", {className: "col-sm-8 col-md-8"}, 
         React.createElement("h1", null, "Marvelous Itemizer")
       ), 
       React.createElement("div", {className: "col-sm-2 col-md-2 icon-new"}, 
-        React.createElement("i", {className: "fa fa-search"})
+        React.createElement("i", {className: "fa fa-search", 
+          onClick: this.props.setUI.bind(null, false), 
+          style: this.style('search')})
       )
     )
   );
@@ -19862,52 +19899,113 @@ module.exports = marvel;
 
 },{"react":156}],159:[function(require,module,exports){
 var React             = require('react');
-var _render           = require('./lifecycle-hooks/render.jsx');
-var _getInitialState   = require('./lifecycle-hooks/get-initial-state.js');
+var lifecycle         = require('./lifecycle-hooks')
+var methods           = require('./methods');
 
 var App = React.createClass({displayName: "App",
-  getInitialState(){return _getInitialState(this)},
-  render(){ return _render(this)}
+  getInitialState:function(){
+    return lifecycle.getInitialState(this);
+  },
+
+  setUI:function(bool){
+    this.setState({toggleUI:bool});
+  },
+
+  setLocalStorage:function(catName, value){
+    methods.setLocalStorage(catName, value);
+  },
+
+  setCategoryData:function(catName, value){
+    return methods.setCategoryData.bind(this, catName, value);
+  },
+
+  render:function(){
+    return lifecycle.render(this);
+  }
 });
 
 
 var elem = React.createElement(App);
 module.exports = {elem: elem, target:document.body};
 
-},{"./lifecycle-hooks/get-initial-state.js":160,"./lifecycle-hooks/render.jsx":161,"react":156}],160:[function(require,module,exports){
-module.exports = (app)=>{
+},{"./lifecycle-hooks":160,"./methods":163,"react":156}],160:[function(require,module,exports){
+module.exports = {
+  render: require('./lib/render.jsx'),
+  getInitialState: require('./lib/get-initial-state.js'),
+
+}
+
+},{"./lib/get-initial-state.js":161,"./lib/render.jsx":162}],161:[function(require,module,exports){
+module.exports = function(app){
   console.log(app);
   return {
-    toggleUI: false,
+    toggleUI: true,
+    currentUI: null,
+    cat1data: (localStorage.getItem('Category 1')) ? localStorage.getItem('Category 1').split(',') : null,
+    cat2data: (localStorage.getItem('Category 2')) ? localStorage.getItem('Category 2').split(',') : null,
   }
 }
 
-},{}],161:[function(require,module,exports){
+},{}],162:[function(require,module,exports){
 var React = require('react');
-var MarvelousHeader   = require('../components/marvelous-header.jsx');
-var CreateItem        = require('../components/create-item.jsx');
+var MarvelousHeader   = require('../../components/marvelous-header.jsx');
+var CreateItem        = require('../../components/create-item.jsx');
 
 
-module.exports = (app) =>{
+module.exports = function(app) {
   console.log(app);
     return (
     React.createElement("div", {className: "container c_app"}, 
-        React.createElement(MarvelousHeader, {state: app.state.toggleUI}), 
-        React.createElement(CreateItem, null)
+        React.createElement(MarvelousHeader, {state: app.state.toggleUI, setUI: app.setUI}), 
+        React.createElement(CreateItem, {state: app.state.toggleUI, setLocalStorage: app.setLocalStorage})
       )
     );
 
 }
 
-},{"../components/create-item.jsx":157,"../components/marvelous-header.jsx":158,"react":156}],162:[function(require,module,exports){
+},{"../../components/create-item.jsx":157,"../../components/marvelous-header.jsx":158,"react":156}],163:[function(require,module,exports){
+module.exports = {
+  setLocalStorage: require('./lib/set-localstorage.js'),
+  setCategoryData: require('./lib/set-category-data.js'),
+}
+
+},{"./lib/set-category-data.js":164,"./lib/set-localstorage.js":165}],164:[function(require,module,exports){
+module.exports = function($__0 ){var catName=$__0.catName,value=$__0.value;
+  switch(catName){
+    case 'Category 1':
+      this.setState('cat1data', value);
+      break;
+    case 'Category 2':
+      this.setState('cat2data', value);
+      break;
+  }
+}.bind(this)
+
+},{}],165:[function(require,module,exports){
+module.exports = function(catName, value){
+  if(localStorage.getItem(catName)){
+    var tmp = localStorage.getItem(catName);
+    tmp = tmp.split(',');
+    tmp.push(value);
+    tmp = tmp.toString();
+    localStorage.setItem(catName, tmp);
+    return {catName: catName, value:tmp};
+
+  }else{
+    localStorage.setItem(catName, value);
+    return {catName:catName, value:value};
+  }
+}
+
+},{}],166:[function(require,module,exports){
 var React    = require('react');
 var itemizer = require('./apps/itemizer.jsx');
 
 var apps = [];
 apps.push(itemizer);
 
-apps.map((app)=>{
+apps.map(function(app){
   React.render(app.elem, app.target);
 })
 
-},{"./apps/itemizer.jsx":159,"react":156}]},{},[162]);
+},{"./apps/itemizer.jsx":159,"react":156}]},{},[166]);

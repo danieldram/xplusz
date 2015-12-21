@@ -35,6 +35,7 @@
     "yargs": "^3.14.0"
   },
   "dependencies": {
+    "babelify": "^7.2.0",
     "body-parser": "^1.13.1",
     "express": "^4.13.3",
     "flux": "^2.0.3",
