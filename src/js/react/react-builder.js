@@ -1,11 +1,19 @@
-var React = require('react');
+var React       = require('react');
+var header      = require('./components/marvelous-header.jsx');
+var createItem  = require('./components/create-item.jsx');
 
 
-var view = [];
-view.push(require('./components/marvelous-header.jsx'));
-view.push(require('./components/create-item.jsx'));
+var app = React.createClass({
+  render(){
+    return (
+      <div className="col-md-12">
+        <h1>render</h1>
+        <header />
+      </div>
+    );
+  }
 
-view.map(function(component){
-    if(component)
-    React.render(component.elm, component.target);
 });
+
+var elem = React.createElement(app, {})
+React.render(elem, document.getElementsByClassName('c_app')[0]);

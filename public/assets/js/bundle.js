@@ -19824,8 +19824,7 @@ var create = React.createClass({displayName: "create",
 
 });
 
-var element = React.createElement(create, {});
-module.exports =  {elm:element, target:document.getElementsByClassName('c_createItem')[0]};
+module.exports = create;
 
 },{"react":156}],158:[function(require,module,exports){
 var React = require('react');
@@ -19849,22 +19848,28 @@ var marvelous = React.createClass({displayName: "marvelous",
 
 });
 
-var element = React.createElement(marvelous, {});
-var component ={elm:element, target:document.getElementsByClassName('c_header')[0]}
 
-module.exports = component;
+module.exports = marvelous;
 
 },{"react":156}],159:[function(require,module,exports){
-var React = require('react');
+var React       = require('react');
+var header      = require('./components/marvelous-header.jsx');
+var createItem  = require('./components/create-item.jsx');
 
 
-var view = [];
-view.push(require('./components/marvelous-header.jsx'));
-view.push(require('./components/create-item.jsx'));
+var app = React.createClass({displayName: "app",
+  render(){
+    return (
+      React.createElement("div", {className: "col-md-12"}, 
+        React.createElement("h1", null, "render"), 
+        React.createElement("header", null)
+      )
+    );
+  }
 
-view.map(function(component){
-    if(component)
-    React.render(component.elm, component.target);
 });
+
+var elem = React.createElement(app, {})
+React.render(elem, document.getElementsByClassName('c_app')[0]);
 
 },{"./components/create-item.jsx":157,"./components/marvelous-header.jsx":158,"react":156}]},{},[159]);

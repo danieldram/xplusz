@@ -7882,9 +7882,15 @@ body {
       text-align: left; }
     .c_app .c_header .icon-new {
       text-align: right; }
-  .c_app .c_createItem input[type='text'] {
-    background-color: transparent;
-    color: #eee;
-    box-shadow: none;
-    border: none;
-    font-size: 3em; }
+  .c_app .c_createItem {
+    padding-top: 10px; }
+    .c_app .c_createItem input[type='text'] {
+      background-color: transparent;
+      color: #fff;
+      box-shadow: none;
+      border: none;
+      font-size: 2em;
+      text-align: center;
+      height: 50px;
+      border-bottom: 2px solid #aaa;
+      border-radius: 0px; }

@@ -12,5 +12,4 @@ var create = React.createClass({
 
 });
 
-var element = React.createElement(create, {});
-module.exports =  {elm:element, target:document.getElementsByClassName('c_createItem')[0]};
+module.exports = create;

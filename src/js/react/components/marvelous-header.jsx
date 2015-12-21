@@ -19,7 +19,5 @@ var marvelous = React.createClass({
 
 });
 
-var element = React.createElement(marvelous, {});
-var component ={elm:element, target:document.getElementsByClassName('c_header')[0]}
 
-module.exports = component;
+module.exports = marvelous;
