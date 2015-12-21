@@ -19812,10 +19812,38 @@ module.exports = require('./lib/React');
 },{"./lib/React":29}],157:[function(require,module,exports){
 var React = require('react');
 
+var create = React.createClass({displayName: "create",
+
+  render(){
+    return (
+      React.createElement("div", {className: "col-sm-12 col-md-12"}, 
+        React.createElement("input", {type: "text", className: "form-control", placeholder: "Enter Item Name"})
+      )
+    );
+  }
+
+});
+
+var element = React.createElement(create, {});
+module.exports =  {elm:element, target:document.getElementsByClassName('c_createItem')[0]};
+
+},{"react":156}],158:[function(require,module,exports){
+var React = require('react');
+
 var marvelous = React.createClass({displayName: "marvelous",
   render(){
     return(
-      React.createElement("h1", null, "Marvelous Itemizer")
+      React.createElement("div", {className: "col-sm-12 col-md-12"}, 
+        React.createElement("div", {className: "col-sm-2 col-md-2 icon-search"}, 
+          React.createElement("i", {className: "fa fa-pencil-square-o"})
+        ), 
+        React.createElement("div", {className: "col-sm-8 col-md-8"}, 
+          React.createElement("h1", null, "Marvelous Itemizer")
+        ), 
+        React.createElement("div", {className: "col-sm-2 col-md-2 icon-new"}, 
+          React.createElement("i", {className: "fa fa-search"})
+        )
+      )
     );
   }
 
@@ -19826,16 +19854,17 @@ var component ={elm:element, target:document.getElementsByClassName('c_header')[
 
 module.exports = component;
 
-},{"react":156}],158:[function(require,module,exports){
+},{"react":156}],159:[function(require,module,exports){
 var React = require('react');
 
 
 var view = [];
 view.push(require('./components/marvelous-header.jsx'));
+view.push(require('./components/create-item.jsx'));
 
 view.map(function(component){
     if(component)
     React.render(component.elm, component.target);
 });
 
-},{"./components/marvelous-header.jsx":157,"react":156}]},{},[158]);
+},{"./components/create-item.jsx":157,"./components/marvelous-header.jsx":158,"react":156}]},{},[159]);

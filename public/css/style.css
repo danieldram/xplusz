@@ -7869,3 +7869,22 @@ body {
       font-weight: bold;
       text-shadow: 0px 1px 2px #323232;
       font-family: 'Merriweather', serif; }
+    .c_app .c_header i {
+      cursor: pointer;
+      margin: 0;
+      padding-top: 22px;
+      color: #555;
+      font-size: 2em;
+      text-shadow: 0px 1px 2px #323232; }
+    .c_app .c_header i:hover {
+      color: #eee; }
+    .c_app .c_header .icon-search {
+      text-align: left; }
+    .c_app .c_header .icon-new {
+      text-align: right; }
+  .c_app .c_createItem input[type='text'] {
+    background-color: transparent;
+    color: #eee;
+    box-shadow: none;
+    border: none;
+    font-size: 3em; }

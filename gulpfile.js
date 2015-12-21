@@ -167,6 +167,8 @@ function startBrowserSync(){
 
     gulp.watch("./src/js/**/*.js", ['js']);
     gulp.watch("./src/js/**/*.jsx", ['js']);
+    gulp.watch("./src/js/**/**/*.jsx", ['js']);
+    gulp.watch("./src/js/**/**/**/*.jsx", ['js']);
 
 
     var options ={

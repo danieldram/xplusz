@@ -13,6 +13,26 @@
     font-weight:bold;
     text-shadow: 0px 1px 2px rgba(50, 50, 50, 5);
     font-family: 'Merriweather', serif;
-
   }
+
+  i{
+    cursor:pointer;
+    margin:0;
+    padding-top: 22px;
+    color:#555;
+    font-size:2em;
+    text-shadow: 0px 1px 2px rgba(50, 50, 50, 5);
+  }
+  i:hover{
+      color:#eee;
+  }
+
+  .icon-search{
+    text-align:left;
+  }
+
+  .icon-new{
+    text-align:right;
+  }
+
 }
