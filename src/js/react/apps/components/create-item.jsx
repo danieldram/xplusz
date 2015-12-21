@@ -38,7 +38,9 @@ function style(){
 function getValues(){
     var value = document.getElementById('createItem__input').value;
     var catName = document.getElementById('createItem__select').value;
-    this.props.setLocalStorage(catName, value);
+    var data = this.props.setLocalStorage(catName, value);
+    console.log(data);
+    this.props.setCategoryData(data);
 }
 
 

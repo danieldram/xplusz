@@ -19850,7 +19850,9 @@ function style(){
 function getValues(){
     var value = document.getElementById('createItem__input').value;
     var catName = document.getElementById('createItem__select').value;
-    this.props.setLocalStorage(catName, value);
+    var data = this.props.setLocalStorage(catName, value);
+    console.log(data);
+    this.props.setCategoryData(data);
 }
 
 
@@ -19912,11 +19914,12 @@ var App = React.createClass({displayName: "App",
   },
 
   setLocalStorage:function(catName, value){
-    methods.setLocalStorage(catName, value);
+    return methods.setLocalStorage(catName, value);
   },
 
-  setCategoryData:function(catName, value){
-    return methods.setCategoryData.bind(this, catName, value);
+  setCategoryData:function($__0 ){var catName=$__0.catName,value=$__0.value;
+    console.log('running');
+    return methods.setCategoryData(this, catName, value);
   },
 
   render:function(){
@@ -19957,7 +19960,10 @@ module.exports = function(app) {
     return (
     React.createElement("div", {className: "container c_app"}, 
         React.createElement(MarvelousHeader, {state: app.state.toggleUI, setUI: app.setUI}), 
-        React.createElement(CreateItem, {state: app.state.toggleUI, setLocalStorage: app.setLocalStorage})
+        React.createElement(CreateItem, {
+          state: app.state.toggleUI, 
+          setLocalStorage: app.setLocalStorage, 
+          setCategoryData: app.setCategoryData})
       )
     );
 
@@ -19970,16 +19976,21 @@ module.exports = {
 }
 
 },{"./lib/set-category-data.js":164,"./lib/set-localstorage.js":165}],164:[function(require,module,exports){
-module.exports = function($__0 ){var catName=$__0.catName,value=$__0.value;
+module.exports = function(app, catName, value){
+  console.log('the app');
+  console.log(app);
+
   switch(catName){
     case 'Category 1':
-      this.setState('cat1data', value);
+      app.setState({'cat1data': value});
+
       break;
     case 'Category 2':
-      this.setState('cat2data', value);
+      app.setState({'cat2data': value});
+
       break;
   }
-}.bind(this)
+}
 
 },{}],165:[function(require,module,exports){
 module.exports = function(catName, value){

@@ -12,11 +12,12 @@ var App = React.createClass({
   },
 
   setLocalStorage(catName, value){
-    methods.setLocalStorage(catName, value);
+    return methods.setLocalStorage(catName, value);
   },
 
-  setCategoryData(catName, value){
-    return methods.setCategoryData.bind(this, catName, value);
+  setCategoryData({catName, value}){
+    console.log('running');
+    return methods.setCategoryData(this, catName, value);
   },
 
   render(){

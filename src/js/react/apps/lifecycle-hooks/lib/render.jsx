@@ -8,7 +8,10 @@ module.exports = (app) =>{
     return (
     <div className="container c_app">
         <MarvelousHeader state = {app.state.toggleUI} setUI = {app.setUI}/>
-        <CreateItem state = {app.state.toggleUI} setLocalStorage = {app.setLocalStorage}/>
+        <CreateItem
+          state = {app.state.toggleUI}
+          setLocalStorage = {app.setLocalStorage}
+          setCategoryData = {app.setCategoryData}/>
       </div>
     );
 
