@@ -1,19 +1,12 @@
 var React             = require('react');
-var MarvelousHeader   = require('./components/marvelous-header.jsx');
-var CreateItem        = require('./components/create-item.jsx');
-
+var _render           = require('./lifecycle-hooks/render.jsx');
+var _getInitialState   = require('./lifecycle-hooks/get-initial-state.js');
 
 var App = React.createClass({
-  render(){
-    return (
-    <div className="container c_app">
-        <MarvelousHeader/>
-        <CreateItem/>
-      </div>
-    );
-  }
-
+  getInitialState(){return _getInitialState(this)},
+  render(){ return _render(this)}
 });
+
 
 var elem = React.createElement(App);
 module.exports = {elem: elem, target:document.body};

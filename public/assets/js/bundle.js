@@ -19831,11 +19831,18 @@ var React = require('react');
 
 var marvel = React.createClass({displayName: "marvel",
   render: render,
+  visibility: visibility,
 
 });
 
+function visibility(){
+  if(this.props.state === false)
+  return false;
+  return true;
+}
+
 function render(){
-  console.log('wtf');
+  console.log(this.props.state);
   return(
     React.createElement("div", {className: "col-sm-12 col-md-12 c_header"}, 
       React.createElement("div", {className: "col-sm-2 col-md-2 icon-search"}, 
@@ -19855,26 +19862,44 @@ module.exports = marvel;
 
 },{"react":156}],159:[function(require,module,exports){
 var React             = require('react');
-var MarvelousHeader   = require('./components/marvelous-header.jsx');
-var CreateItem        = require('./components/create-item.jsx');
-
+var _render           = require('./lifecycle-hooks/render.jsx');
+var _getInitialState   = require('./lifecycle-hooks/get-initial-state.js');
 
 var App = React.createClass({displayName: "App",
-  render(){
-    return (
-    React.createElement("div", {className: "container c_app"}, 
-        React.createElement(MarvelousHeader, null), 
-        React.createElement(CreateItem, null)
-      )
-    );
-  }
-
+  getInitialState(){return _getInitialState(this)},
+  render(){ return _render(this)}
 });
+
 
 var elem = React.createElement(App);
 module.exports = {elem: elem, target:document.body};
 
-},{"./components/create-item.jsx":157,"./components/marvelous-header.jsx":158,"react":156}],160:[function(require,module,exports){
+},{"./lifecycle-hooks/get-initial-state.js":160,"./lifecycle-hooks/render.jsx":161,"react":156}],160:[function(require,module,exports){
+module.exports = (app)=>{
+  console.log(app);
+  return {
+    toggleUI: false,
+  }
+}
+
+},{}],161:[function(require,module,exports){
+var React = require('react');
+var MarvelousHeader   = require('../components/marvelous-header.jsx');
+var CreateItem        = require('../components/create-item.jsx');
+
+
+module.exports = (app) =>{
+  console.log(app);
+    return (
+    React.createElement("div", {className: "container c_app"}, 
+        React.createElement(MarvelousHeader, {state: app.state.toggleUI}), 
+        React.createElement(CreateItem, null)
+      )
+    );
+
+}
+
+},{"../components/create-item.jsx":157,"../components/marvelous-header.jsx":158,"react":156}],162:[function(require,module,exports){
 var React    = require('react');
 var itemizer = require('./apps/itemizer.jsx');
 
@@ -19885,4 +19910,4 @@ apps.map((app)=>{
   React.render(app.elem, app.target);
 })
 
-},{"./apps/itemizer.jsx":159,"react":156}]},{},[160]);
+},{"./apps/itemizer.jsx":159,"react":156}]},{},[162]);

@@ -2,11 +2,18 @@ var React = require('react');
 
 var marvel = React.createClass({
   render: render,
+  visibility: visibility,
 
 });
 
+function visibility(){
+  if(this.props.state === false)
+  return false;
+  return true;
+}
+
 function render(){
-  console.log('wtf');
+  console.log(this.props.state);
   return(
     <div className="col-sm-12 col-md-12 c_header">
       <div className="col-sm-2 col-md-2 icon-search">
