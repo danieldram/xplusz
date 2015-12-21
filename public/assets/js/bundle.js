@@ -19983,11 +19983,10 @@ module.exports = function(app, catName, value){
   switch(catName){
     case 'Category 1':
       app.setState({'cat1data': value});
-
       break;
+      
     case 'Category 2':
       app.setState({'cat2data': value});
-
       break;
   }
 }
