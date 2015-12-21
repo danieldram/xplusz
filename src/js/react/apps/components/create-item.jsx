@@ -4,7 +4,7 @@ var create = React.createClass({
 
   render(){
     return (
-      <div className="col-sm-12 col-md-12">
+      <div className="col-sm-12 col-md-12 c_createItem">
         <input type="text" className="form-control" placeholder="Enter Item Name" />
       </div>
     );

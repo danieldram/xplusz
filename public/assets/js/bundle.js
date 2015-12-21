@@ -19816,7 +19816,7 @@ var create = React.createClass({displayName: "create",
 
   render(){
     return (
-      React.createElement("div", {className: "col-sm-12 col-md-12"}, 
+      React.createElement("div", {className: "col-sm-12 col-md-12 c_createItem"}, 
         React.createElement("input", {type: "text", className: "form-control", placeholder: "Enter Item Name"})
       )
     );
@@ -19829,47 +19829,60 @@ module.exports = create;
 },{"react":156}],158:[function(require,module,exports){
 var React = require('react');
 
-var marvelous = React.createClass({displayName: "marvelous",
-  render(){
-    return(
-      React.createElement("div", {className: "col-sm-12 col-md-12"}, 
-        React.createElement("div", {className: "col-sm-2 col-md-2 icon-search"}, 
-          React.createElement("i", {className: "fa fa-pencil-square-o"})
-        ), 
-        React.createElement("div", {className: "col-sm-8 col-md-8"}, 
-          React.createElement("h1", null, "Marvelous Itemizer")
-        ), 
-        React.createElement("div", {className: "col-sm-2 col-md-2 icon-new"}, 
-          React.createElement("i", {className: "fa fa-search"})
-        )
-      )
-    );
-  }
+var marvel = React.createClass({displayName: "marvel",
+  render: render,
 
 });
 
+function render(){
+  console.log('wtf');
+  return(
+    React.createElement("div", {className: "col-sm-12 col-md-12 c_header"}, 
+      React.createElement("div", {className: "col-sm-2 col-md-2 icon-search"}, 
+        React.createElement("i", {className: "fa fa-pencil-square-o"})
+      ), 
+      React.createElement("div", {className: "col-sm-8 col-md-8"}, 
+        React.createElement("h1", null, "Marvelous Itemizer")
+      ), 
+      React.createElement("div", {className: "col-sm-2 col-md-2 icon-new"}, 
+        React.createElement("i", {className: "fa fa-search"})
+      )
+    )
+  );
+}
 
-module.exports = marvelous;
+module.exports = marvel;
 
 },{"react":156}],159:[function(require,module,exports){
-var React       = require('react');
-var header      = require('./components/marvelous-header.jsx');
-var createItem  = require('./components/create-item.jsx');
+var React             = require('react');
+var MarvelousHeader   = require('./components/marvelous-header.jsx');
+var CreateItem        = require('./components/create-item.jsx');
 
 
-var app = React.createClass({displayName: "app",
+var App = React.createClass({displayName: "App",
   render(){
     return (
-      React.createElement("div", {className: "col-md-12"}, 
-        React.createElement("h1", null, "render"), 
-        React.createElement("header", null)
+    React.createElement("div", {className: "container c_app"}, 
+        React.createElement(MarvelousHeader, null), 
+        React.createElement(CreateItem, null)
       )
     );
   }
 
 });
 
-var elem = React.createElement(app, {})
-React.render(elem, document.getElementsByClassName('c_app')[0]);
+var elem = React.createElement(App);
+module.exports = {elem: elem, target:document.body};
 
-},{"./components/create-item.jsx":157,"./components/marvelous-header.jsx":158,"react":156}]},{},[159]);
+},{"./components/create-item.jsx":157,"./components/marvelous-header.jsx":158,"react":156}],160:[function(require,module,exports){
+var React    = require('react');
+var itemizer = require('./apps/itemizer.jsx');
+
+var apps = [];
+apps.push(itemizer);
+
+apps.map((app)=>{
+  React.render(app.elem, app.target);
+})
+
+},{"./apps/itemizer.jsx":159,"react":156}]},{},[160]);
