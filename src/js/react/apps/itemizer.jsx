@@ -20,6 +20,10 @@ var App = React.createClass({
     return methods.setCategoryData(this, catName, value);
   },
 
+  delete(catName, value){
+    methods.deleteItem(this, catName, value);
+  },
+
   render(){
     return lifecycle.render(this);
   }

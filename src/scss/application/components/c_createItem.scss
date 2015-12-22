@@ -6,7 +6,7 @@
 
   input[type='text']{
     padding-left:20px;
-    background-color:#eee;
+    background-color:transparent;
     color:#444;
     box-shadow: none;
     border:none;
@@ -38,6 +38,7 @@
 
   }
   .btn-xplusz{
+    box-shadow:none;
     background-color: #eee;
     color:#222;
     font-weight:bold;
@@ -46,6 +47,12 @@
 
   .btn-xplusz:hover{
     background-color: #aaa;
+  }
+
+  .btn-xplusz__search{
+    margin-top: 0;
+    border:none;
+    height:50px;
   }
 
 }

@@ -19819,24 +19819,29 @@ var columns = React.createClass({displayName: "columns",
 
 
 function renderCards(filterby){
-  return this.props.data.map(function(data, index){
+  var catData = this.props.data;
+  if(typeof catData === 'string'){
+    catData = catData.split(',');
+  }
+
+  return catData.map(function(data, index){
     return(
         React.createElement("li", {key: ("cat1-" + index), className: "col-sm-12 col-md-12"}, 
           React.createElement("div", {className: "col-sm-10 col-md-10"}, 
             data
           ), 
           React.createElement("div", {className: "col-sm-2 col-md-2"}, 
-            React.createElement("i", {className: "fa fa-close pull-right"})
+            React.createElement("i", {onClick: this.props.delete.bind(null, this.props.catName, data), className: "fa fa-close pull-right"})
           )
         )
     );
 
-  });
+  }.bind(this));
 
 }
 
 function render(){
-  console.log(this.props.data);
+  if(this.props.data)
   var li = this.renderCards();
 
   return (
@@ -19893,7 +19898,7 @@ function getValues(){
     var value = document.getElementById('createItem__input').value;
     var catName = document.getElementById('createItem__select').value;
     var data = this.props.setLocalStorage(catName, value);
-    console.log(data);
+
     this.props.setCategoryData(data);
 }
 
@@ -19942,6 +19947,36 @@ function render(){
 module.exports = marvel;
 
 },{"react":156}],160:[function(require,module,exports){
+var React = require('react');
+
+var search = React.createClass({displayName: "search",
+  render:render,
+  style:style,
+
+});
+
+function render(){
+  return(
+    React.createElement("div", {className: "col-sm-12 col-md-12 c_createItem", style: this.style()}, 
+      React.createElement("div", {className: "col-sm-8 col-md-8"}, 
+        React.createElement("input", {id: "searchItem__input", type: "text", className: "form-control", placeholder: "Search for items by name"})
+      ), 
+      React.createElement("div", {className: "col-sm-4 col-md-4"}, 
+        React.createElement("button", {className: "form-control btn-xplusz btn-xplusz__search"}, "SEARCH")
+      )
+    )
+
+  );
+}
+
+function style(){
+  return (this.props.state) ? {display:'none'} : {display:'block'};
+}
+
+
+module.exports = search;
+
+},{"react":156}],161:[function(require,module,exports){
 var React             = require('react');
 var lifecycle         = require('./lifecycle-hooks')
 var methods           = require('./methods');
@@ -19964,6 +19999,10 @@ var App = React.createClass({displayName: "App",
     return methods.setCategoryData(this, catName, value);
   },
 
+  "delete":function(catName, value){
+    methods.deleteItem(this, catName, value);
+  },
+
   render:function(){
     return lifecycle.render(this);
   }
@@ -19973,14 +20012,14 @@ var App = React.createClass({displayName: "App",
 var elem = React.createElement(App);
 module.exports = {elem: elem, target:document.body};
 
-},{"./lifecycle-hooks":161,"./methods":164,"react":156}],161:[function(require,module,exports){
+},{"./lifecycle-hooks":162,"./methods":165,"react":156}],162:[function(require,module,exports){
 module.exports = {
   render: require('./lib/render.jsx'),
   getInitialState: require('./lib/get-initial-state.js'),
 
 }
 
-},{"./lib/get-initial-state.js":162,"./lib/render.jsx":163}],162:[function(require,module,exports){
+},{"./lib/get-initial-state.js":163,"./lib/render.jsx":164}],163:[function(require,module,exports){
 module.exports = function(app){
   console.log(app);
   return {
@@ -19991,10 +20030,11 @@ module.exports = function(app){
   }
 }
 
-},{}],163:[function(require,module,exports){
+},{}],164:[function(require,module,exports){
 var React = require('react');
 var MarvelousHeader   = require('../../components/marvelous-header.jsx');
 var CreateItem        = require('../../components/create-item.jsx');
+var SearchItem        = require('../../components/search-item.jsx');
 var CategoryColumns   = require('../../components/category-columns.jsx');
 
 module.exports = function(app) {
@@ -20008,12 +20048,18 @@ module.exports = function(app) {
           setLocalStorage: app.setLocalStorage, 
           setCategoryData: app.setCategoryData}), 
 
+        React.createElement(SearchItem, {
+          state: app.state.toggleUI}
+          ), 
+
         React.createElement(CategoryColumns, {
           catName: "Category 1", 
+          delete: app.delete, 
           data: app.state.cat1data}), 
 
         React.createElement(CategoryColumns, {
             catName: "Category 2", 
+            delete: app.delete, 
             data: app.state.cat2data})
 
 
@@ -20023,13 +20069,44 @@ module.exports = function(app) {
 
 }
 
-},{"../../components/category-columns.jsx":157,"../../components/create-item.jsx":158,"../../components/marvelous-header.jsx":159,"react":156}],164:[function(require,module,exports){
+},{"../../components/category-columns.jsx":157,"../../components/create-item.jsx":158,"../../components/marvelous-header.jsx":159,"../../components/search-item.jsx":160,"react":156}],165:[function(require,module,exports){
 module.exports = {
   setLocalStorage: require('./lib/set-localstorage.js'),
   setCategoryData: require('./lib/set-category-data.js'),
+  deleteItem:      require('./lib/delete-item.js'),
 }
 
-},{"./lib/set-category-data.js":165,"./lib/set-localstorage.js":166}],165:[function(require,module,exports){
+},{"./lib/delete-item.js":166,"./lib/set-category-data.js":167,"./lib/set-localstorage.js":168}],166:[function(require,module,exports){
+module.exports = function(app, catName, value){
+  console.log(catName);
+  console.log(value);
+  var tmp = [];
+  switch(catName){
+    case 'Category 1':
+      var catData = app.state.cat1data;
+      if(typeof catData=='string')
+      catData = catData.split(',');
+
+      catData.map(function(data){ if(value !== data) tmp.push(data)});
+      app.setState({'cat1data': tmp});
+      localStorage.setItem('Category 1', tmp.toString())
+    break;
+
+    case 'Category 2':
+      var catData = app.state.cat2data;
+      if(typeof catData=='string')
+      catData = catData.split(',');
+
+      catData.map(function(data){ if(value !== data) tmp.push(data)});
+      app.setState({'cat2data': tmp});
+      localStorage.setItem('Category 2', tmp.toString())
+    break;
+
+  }
+
+}
+
+},{}],167:[function(require,module,exports){
 module.exports = function(app, catName, value){
   console.log('the app');
   console.log(app);
@@ -20038,14 +20115,14 @@ module.exports = function(app, catName, value){
     case 'Category 1':
       app.setState({'cat1data': value});
       break;
-      
+
     case 'Category 2':
       app.setState({'cat2data': value});
       break;
   }
 }
 
-},{}],166:[function(require,module,exports){
+},{}],168:[function(require,module,exports){
 module.exports = function(catName, value){
   if(localStorage.getItem(catName)){
     var tmp = localStorage.getItem(catName);
@@ -20061,7 +20138,7 @@ module.exports = function(catName, value){
   }
 }
 
-},{}],167:[function(require,module,exports){
+},{}],169:[function(require,module,exports){
 var React    = require('react');
 var itemizer = require('./apps/itemizer.jsx');
 
@@ -20072,4 +20149,4 @@ apps.map(function(app){
   React.render(app.elem, app.target);
 })
 
-},{"./apps/itemizer.jsx":160,"react":156}]},{},[167]);
+},{"./apps/itemizer.jsx":161,"react":156}]},{},[169]);

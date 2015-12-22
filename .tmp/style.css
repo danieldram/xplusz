@@ -7932,7 +7932,7 @@ body {
     border-radius: 5px; }
     .c_app .c_createItem input[type='text'] {
       padding-left: 20px;
-      background-color: #eee;
+      background-color: transparent;
       color: #444;
       box-shadow: none;
       border: none;
@@ -7957,12 +7957,17 @@ body {
     .c_app .c_createItem .btn-container {
       padding: 0; }
     .c_app .c_createItem .btn-xplusz {
+      box-shadow: none;
       background-color: #eee;
       color: #222;
       font-weight: bold;
       transition: .2s; }
     .c_app .c_createItem .btn-xplusz:hover {
       background-color: #aaa; }
+    .c_app .c_createItem .btn-xplusz__search {
+      margin-top: 0;
+      border: none;
+      height: 50px; }
   .c_app .c_categoryColumns {
     padding: 0 5px; }
     .c_app .c_categoryColumns h4 {
@@ -7983,5 +7988,5 @@ body {
       cursor: pointer;
       transition: .5s; }
     .c_app .c_categoryColumns i:hover {
-      font-size: .9em;
+      font-size: 1.25em;
       color: red; }
