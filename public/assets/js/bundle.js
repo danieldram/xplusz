@@ -19834,7 +19834,7 @@ function renderCards(filterby){
             data
           ), 
           React.createElement("div", {className: "col-sm-2 col-md-2"}, 
-            React.createElement("i", {onClick: this.props.delete.bind(null, this.props.catName, data), className: "fa fa-close pull-right"})
+            React.createElement("i", {onClick: this.props.delete.bind(null, this.props.catName, index), className: "fa fa-close pull-right"})
           )
         )
      );
@@ -19856,7 +19856,7 @@ function filteredCards(){
             data
           ), 
           React.createElement("div", {className: "col-sm-2 col-md-2"}, 
-            React.createElement("i", {onClick: this.props.delete.bind(null, this.props.catName, data), className: "fa fa-close pull-right"})
+            React.createElement("i", {onClick: this.props.delete.bind(null, this.props.catName, index), className: "fa fa-close pull-right"})
           )
         )
      );
@@ -19977,6 +19977,7 @@ var React = require('react');
 var search = React.createClass({displayName: "search",
   render:render,
   style:style,
+  setFilter: setFilter,
 
 });
 
@@ -19987,7 +19988,7 @@ function render(){
         React.createElement("input", {id: "searchItem__input", type: "text", className: "form-control", placeholder: "Search for items by name"})
       ), 
       React.createElement("div", {className: "col-sm-4 col-md-4"}, 
-        React.createElement("button", {className: "form-control btn-xplusz btn-xplusz__search"}, "SEARCH")
+        React.createElement("button", {onClick: this.setFilter, className: "form-control btn-xplusz btn-xplusz__search"}, "SEARCH")
       )
     )
 
@@ -19998,6 +19999,11 @@ function style(){
   return (this.props.state) ? {display:'none'} : {display:'block'};
 }
 
+function setFilter(){
+    var value = document.getElementById('searchItem__input').value;
+    console.log(value);
+    this.props.filter(value);
+};
 
 module.exports = search;
 
@@ -20024,8 +20030,12 @@ var App = React.createClass({displayName: "App",
     return methods.setCategoryData(this, catName, value);
   },
 
-  "delete":function(catName, value){
-    methods.deleteItem(this, catName, value);
+  filter:function(value){
+    methods.setFilter(this, value);
+  },
+
+  "delete":function(catName, index){
+    methods.deleteItem(this, catName, index);
   },
 
   render:function(){
@@ -20052,7 +20062,7 @@ module.exports = function(app){
     currentUI: null,
     cat1data: (localStorage.getItem('Category 1')) ? localStorage.getItem('Category 1').split(',') : null,
     cat2data: (localStorage.getItem('Category 2')) ? localStorage.getItem('Category 2').split(',') : null,
-    filter: 'test1',
+    filter: null,
   }
 }
 
@@ -20075,8 +20085,8 @@ module.exports = function(app) {
           setCategoryData: app.setCategoryData}), 
 
         React.createElement(SearchItem, {
-          state: app.state.toggleUI}
-          ), 
+          state: app.state.toggleUI, 
+          filter: app.filter}), 
 
         React.createElement(CategoryColumns, {
           catName: "Category 1", 
@@ -20086,11 +20096,11 @@ module.exports = function(app) {
           filter: app.state.filter}), 
 
         React.createElement(CategoryColumns, {
-            catName: "Category 2", 
-            delete: app.delete, 
-            data: app.state.cat2data, 
-            toggle: app.state.toggleUI, 
-            filter: app.state.filter})
+          catName: "Category 2", 
+          delete: app.delete, 
+          data: app.state.cat2data, 
+          toggle: app.state.toggleUI, 
+          filter: app.state.filter})
 
 
 
@@ -20103,23 +20113,24 @@ module.exports = function(app) {
 module.exports = {
   setLocalStorage: require('./lib/set-localstorage.js'),
   setCategoryData: require('./lib/set-category-data.js'),
+  setFilter:       require('./lib/set-filter.js'),
   deleteItem:      require('./lib/delete-item.js'),
 }
 
-},{"./lib/delete-item.js":166,"./lib/set-category-data.js":167,"./lib/set-localstorage.js":168}],166:[function(require,module,exports){
-module.exports = function(app, catName, value){
-  console.log(catName);
-  console.log(value);
-  var tmp = [];
+},{"./lib/delete-item.js":166,"./lib/set-category-data.js":167,"./lib/set-filter.js":168,"./lib/set-localstorage.js":169}],166:[function(require,module,exports){
+module.exports = function(app, catName, index){
+
   switch(catName){
     case 'Category 1':
       var catData = app.state.cat1data;
       if(typeof catData=='string')
       catData = catData.split(',');
 
-      catData.map(function(data){ if(value !== data) tmp.push(data)});
-      app.setState({'cat1data': tmp});
-      localStorage.setItem('Category 1', tmp.toString())
+      console.log(index);
+      catData.splice(index, index+1);
+      console.log(catData);
+      app.setState({'cat1data': catData});
+      localStorage.setItem('Category 1', catData.toString())
     break;
 
     case 'Category 2':
@@ -20127,9 +20138,9 @@ module.exports = function(app, catName, value){
       if(typeof catData=='string')
       catData = catData.split(',');
 
-      catData.map(function(data){ if(value !== data) tmp.push(data)});
-      app.setState({'cat2data': tmp});
-      localStorage.setItem('Category 2', tmp.toString())
+      catData.splice(index, index+1);
+      app.setState({'cat2data': catData});
+      localStorage.setItem('Category 2', catData.toString())
     break;
 
   }
@@ -20153,6 +20164,11 @@ module.exports = function(app, catName, value){
 }
 
 },{}],168:[function(require,module,exports){
+module.exports = function(app, value){
+  app.setState({filter:value});
+}
+
+},{}],169:[function(require,module,exports){
 module.exports = function(catName, value){
   if(localStorage.getItem(catName)){
     var tmp = localStorage.getItem(catName);
@@ -20168,7 +20184,7 @@ module.exports = function(catName, value){
   }
 }
 
-},{}],169:[function(require,module,exports){
+},{}],170:[function(require,module,exports){
 var React    = require('react');
 var itemizer = require('./apps/itemizer.jsx');
 
@@ -20179,4 +20195,4 @@ apps.map(function(app){
   React.render(app.elem, app.target);
 })
 
-},{"./apps/itemizer.jsx":161,"react":156}]},{},[169]);
+},{"./apps/itemizer.jsx":161,"react":156}]},{},[170]);

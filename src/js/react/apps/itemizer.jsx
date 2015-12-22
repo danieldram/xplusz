@@ -20,8 +20,12 @@ var App = React.createClass({
     return methods.setCategoryData(this, catName, value);
   },
 
-  delete(catName, value){
-    methods.deleteItem(this, catName, value);
+  filter(value){
+    methods.setFilter(this, value);
+  },
+
+  delete(catName, index){
+    methods.deleteItem(this, catName, index);
   },
 
   render(){

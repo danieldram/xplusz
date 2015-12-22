@@ -17,7 +17,7 @@ module.exports = (app) =>{
 
         <SearchItem
           state = {app.state.toggleUI}
-          />
+          filter = {app.filter}/>
 
         <CategoryColumns
           catName = 'Category 1'
@@ -27,11 +27,11 @@ module.exports = (app) =>{
           filter = {app.state.filter}/>
 
         <CategoryColumns
-            catName = 'Category 2'
-            delete = {app.delete}
-            data = {app.state.cat2data}
-            toggle = {app.state.toggleUI}
-            filter = {app.state.filter}/>
+          catName = 'Category 2'
+          delete = {app.delete}
+          data = {app.state.cat2data}
+          toggle = {app.state.toggleUI}
+          filter = {app.state.filter}/>
 
 
 

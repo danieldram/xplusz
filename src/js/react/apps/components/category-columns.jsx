@@ -22,7 +22,7 @@ function renderCards(filterby){
             {data}
           </div>
           <div className="col-sm-2 col-md-2">
-            <i onClick={this.props.delete.bind(null, this.props.catName, data)} className="fa fa-close pull-right"></i>
+            <i onClick={this.props.delete.bind(null, this.props.catName, index)} className="fa fa-close pull-right"></i>
           </div>
         </li>
      );
@@ -44,7 +44,7 @@ function filteredCards(){
             {data}
           </div>
           <div className="col-sm-2 col-md-2">
-            <i onClick={this.props.delete.bind(null, this.props.catName, data)} className="fa fa-close pull-right"></i>
+            <i onClick={this.props.delete.bind(null, this.props.catName, index)} className="fa fa-close pull-right"></i>
           </div>
         </li>
      );

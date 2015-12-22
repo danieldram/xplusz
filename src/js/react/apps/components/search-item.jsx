@@ -3,6 +3,7 @@ var React = require('react');
 var search = React.createClass({
   render:render,
   style:style,
+  setFilter: setFilter,
 
 });
 
@@ -13,7 +14,7 @@ function render(){
         <input id="searchItem__input" type="text" className="form-control" placeholder="Search for items by name" />
       </div>
       <div className="col-sm-4 col-md-4">
-        <button className="form-control btn-xplusz btn-xplusz__search">SEARCH</button>
+        <button onClick={this.setFilter} className="form-control btn-xplusz btn-xplusz__search">SEARCH</button>
       </div>
     </div>
 
@@ -24,5 +25,10 @@ function style(){
   return (this.props.state) ? {display:'none'} : {display:'block'};
 }
 
+function setFilter(){
+    var value = document.getElementById('searchItem__input').value;
+    console.log(value);
+    this.props.filter(value);
+};
 
 module.exports = search;
