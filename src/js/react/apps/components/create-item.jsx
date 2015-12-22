@@ -21,7 +21,7 @@ function render(){
         </select>
       </div>
 
-      <div className="col-sm-6 col-md-6">
+      <div className="col-sm-6 col-md-6 btn-container">
       <button
         className="btn btn-xplusz col-sm-12 col-md-12"
         onClick={this.getValues}>ADD ITEM</button>

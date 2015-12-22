@@ -19812,6 +19812,48 @@ module.exports = require('./lib/React');
 },{"./lib/React":29}],157:[function(require,module,exports){
 var React = require('react');
 
+var columns = React.createClass({displayName: "columns",
+  render:render,
+  renderCards: renderCards,
+  });
+
+
+function renderCards(filterby){
+  return this.props.data.map(function(data, index){
+    return(
+        React.createElement("li", {key: ("cat1-" + index), className: "col-sm-12 col-md-12"}, 
+          React.createElement("div", {className: "col-sm-10 col-md-10"}, 
+            data
+          ), 
+          React.createElement("div", {className: "col-sm-2 col-md-2"}, 
+            React.createElement("i", {className: "fa fa-close pull-right"})
+          )
+        )
+    );
+
+  });
+
+}
+
+function render(){
+  console.log(this.props.data);
+  var li = this.renderCards();
+
+  return (
+    React.createElement("div", {className: "col-sm-6 col-md-6 c_categoryColumns"}, 
+      React.createElement("h4", null, this.props.catName), 
+      React.createElement("ul", null, 
+        li
+      )
+    )
+  );
+}
+
+module.exports = columns;
+
+},{"react":156}],158:[function(require,module,exports){
+var React = require('react');
+
 var create = React.createClass({displayName: "create",
 
   render:render,
@@ -19833,7 +19875,7 @@ function render(){
         )
       ), 
 
-      React.createElement("div", {className: "col-sm-6 col-md-6"}, 
+      React.createElement("div", {className: "col-sm-6 col-md-6 btn-container"}, 
       React.createElement("button", {
         className: "btn btn-xplusz col-sm-12 col-md-12", 
         onClick: this.getValues}, "ADD ITEM")
@@ -19858,7 +19900,7 @@ function getValues(){
 
 module.exports = create;
 
-},{"react":156}],158:[function(require,module,exports){
+},{"react":156}],159:[function(require,module,exports){
 var React = require('react');
 
 var marvel = React.createClass({displayName: "marvel",
@@ -19899,7 +19941,7 @@ function render(){
 
 module.exports = marvel;
 
-},{"react":156}],159:[function(require,module,exports){
+},{"react":156}],160:[function(require,module,exports){
 var React             = require('react');
 var lifecycle         = require('./lifecycle-hooks')
 var methods           = require('./methods');
@@ -19931,14 +19973,14 @@ var App = React.createClass({displayName: "App",
 var elem = React.createElement(App);
 module.exports = {elem: elem, target:document.body};
 
-},{"./lifecycle-hooks":160,"./methods":163,"react":156}],160:[function(require,module,exports){
+},{"./lifecycle-hooks":161,"./methods":164,"react":156}],161:[function(require,module,exports){
 module.exports = {
   render: require('./lib/render.jsx'),
   getInitialState: require('./lib/get-initial-state.js'),
 
 }
 
-},{"./lib/get-initial-state.js":161,"./lib/render.jsx":162}],161:[function(require,module,exports){
+},{"./lib/get-initial-state.js":162,"./lib/render.jsx":163}],162:[function(require,module,exports){
 module.exports = function(app){
   console.log(app);
   return {
@@ -19949,33 +19991,45 @@ module.exports = function(app){
   }
 }
 
-},{}],162:[function(require,module,exports){
+},{}],163:[function(require,module,exports){
 var React = require('react');
 var MarvelousHeader   = require('../../components/marvelous-header.jsx');
 var CreateItem        = require('../../components/create-item.jsx');
-
+var CategoryColumns   = require('../../components/category-columns.jsx');
 
 module.exports = function(app) {
   console.log(app);
+
     return (
     React.createElement("div", {className: "container c_app"}, 
         React.createElement(MarvelousHeader, {state: app.state.toggleUI, setUI: app.setUI}), 
         React.createElement(CreateItem, {
           state: app.state.toggleUI, 
           setLocalStorage: app.setLocalStorage, 
-          setCategoryData: app.setCategoryData})
-      )
+          setCategoryData: app.setCategoryData}), 
+
+        React.createElement(CategoryColumns, {
+          catName: "Category 1", 
+          data: app.state.cat1data}), 
+
+        React.createElement(CategoryColumns, {
+            catName: "Category 2", 
+            data: app.state.cat2data})
+
+
+
+    )
     );
 
 }
 
-},{"../../components/create-item.jsx":157,"../../components/marvelous-header.jsx":158,"react":156}],163:[function(require,module,exports){
+},{"../../components/category-columns.jsx":157,"../../components/create-item.jsx":158,"../../components/marvelous-header.jsx":159,"react":156}],164:[function(require,module,exports){
 module.exports = {
   setLocalStorage: require('./lib/set-localstorage.js'),
   setCategoryData: require('./lib/set-category-data.js'),
 }
 
-},{"./lib/set-category-data.js":164,"./lib/set-localstorage.js":165}],164:[function(require,module,exports){
+},{"./lib/set-category-data.js":165,"./lib/set-localstorage.js":166}],165:[function(require,module,exports){
 module.exports = function(app, catName, value){
   console.log('the app');
   console.log(app);
@@ -19991,7 +20045,7 @@ module.exports = function(app, catName, value){
   }
 }
 
-},{}],165:[function(require,module,exports){
+},{}],166:[function(require,module,exports){
 module.exports = function(catName, value){
   if(localStorage.getItem(catName)){
     var tmp = localStorage.getItem(catName);
@@ -20007,7 +20061,7 @@ module.exports = function(catName, value){
   }
 }
 
-},{}],166:[function(require,module,exports){
+},{}],167:[function(require,module,exports){
 var React    = require('react');
 var itemizer = require('./apps/itemizer.jsx');
 
@@ -20018,4 +20072,4 @@ apps.map(function(app){
   React.render(app.elem, app.target);
 })
 
-},{"./apps/itemizer.jsx":159,"react":156}]},{},[166]);
+},{"./apps/itemizer.jsx":160,"react":156}]},{},[167]);
