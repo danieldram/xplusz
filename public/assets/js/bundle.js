@@ -19846,10 +19846,10 @@ function filteredCards(){
   if(typeof catData === 'string'){
     catData = catData.split(',');
   }
-
+  var re = new RegExp(this.props.filter);
   return catData.map(function(data, index){
 
-    if(this.props.filter === data)
+    if(re.test(data))
     return(
         React.createElement("li", {key: ("cat1-" + index), className: "col-sm-12 col-md-12"}, 
           React.createElement("div", {className: "col-sm-10 col-md-10"}, 

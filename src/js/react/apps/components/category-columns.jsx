@@ -34,10 +34,10 @@ function filteredCards(){
   if(typeof catData === 'string'){
     catData = catData.split(',');
   }
-
+  var re = new RegExp(this.props.filter);
   return catData.map((data, index)=>{
 
-    if(this.props.filter === data)
+    if(re.test(data))
     return(
         <li key={`cat1-${index}`} className="col-sm-12 col-md-12">
           <div className="col-sm-10 col-md-10">
