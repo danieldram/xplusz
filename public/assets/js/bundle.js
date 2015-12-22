@@ -19815,6 +19815,8 @@ var React = require('react');
 var columns = React.createClass({displayName: "columns",
   render:render,
   renderCards: renderCards,
+  filteredCards: filteredCards,
+
   });
 
 
@@ -19825,6 +19827,7 @@ function renderCards(filterby){
   }
 
   return catData.map(function(data, index){
+
     return(
         React.createElement("li", {key: ("cat1-" + index), className: "col-sm-12 col-md-12"}, 
           React.createElement("div", {className: "col-sm-10 col-md-10"}, 
@@ -19834,15 +19837,37 @@ function renderCards(filterby){
             React.createElement("i", {onClick: this.props.delete.bind(null, this.props.catName, data), className: "fa fa-close pull-right"})
           )
         )
-    );
-
+     );
   }.bind(this));
-
 }
+
+function filteredCards(){
+  var catData = this.props.data;
+  if(typeof catData === 'string'){
+    catData = catData.split(',');
+  }
+
+  return catData.map(function(data, index){
+
+    if(this.props.filter === data)
+    return(
+        React.createElement("li", {key: ("cat1-" + index), className: "col-sm-12 col-md-12"}, 
+          React.createElement("div", {className: "col-sm-10 col-md-10"}, 
+            data
+          ), 
+          React.createElement("div", {className: "col-sm-2 col-md-2"}, 
+            React.createElement("i", {onClick: this.props.delete.bind(null, this.props.catName, data), className: "fa fa-close pull-right"})
+          )
+        )
+     );
+  }.bind(this));
+}
+
+
 
 function render(){
   if(this.props.data)
-  var li = this.renderCards();
+  var li = (!this.props.toggle) ? this.filteredCards(): this.renderCards();
 
   return (
     React.createElement("div", {className: "col-sm-6 col-md-6 c_categoryColumns"}, 
@@ -20027,6 +20052,7 @@ module.exports = function(app){
     currentUI: null,
     cat1data: (localStorage.getItem('Category 1')) ? localStorage.getItem('Category 1').split(',') : null,
     cat2data: (localStorage.getItem('Category 2')) ? localStorage.getItem('Category 2').split(',') : null,
+    filter: 'test1',
   }
 }
 
@@ -20055,12 +20081,16 @@ module.exports = function(app) {
         React.createElement(CategoryColumns, {
           catName: "Category 1", 
           delete: app.delete, 
-          data: app.state.cat1data}), 
+          data: app.state.cat1data, 
+          toggle: app.state.toggleUI, 
+          filter: app.state.filter}), 
 
         React.createElement(CategoryColumns, {
             catName: "Category 2", 
             delete: app.delete, 
-            data: app.state.cat2data})
+            data: app.state.cat2data, 
+            toggle: app.state.toggleUI, 
+            filter: app.state.filter})
 
 
 

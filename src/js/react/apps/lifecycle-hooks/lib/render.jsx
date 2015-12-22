@@ -22,12 +22,16 @@ module.exports = (app) =>{
         <CategoryColumns
           catName = 'Category 1'
           delete = {app.delete}
-          data = {app.state.cat1data}/>
+          data = {app.state.cat1data}
+          toggle = {app.state.toggleUI}
+          filter = {app.state.filter}/>
 
         <CategoryColumns
             catName = 'Category 2'
             delete = {app.delete}
-            data = {app.state.cat2data}/>
+            data = {app.state.cat2data}
+            toggle = {app.state.toggleUI}
+            filter = {app.state.filter}/>
 
 
 
